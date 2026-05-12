@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Candidate Rankings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<nav>
+    <a href="/">Home</a>
+    <a href="/add">Add Candidate</a>
+    <a href="/ranking">Rankings</a>
+</nav>
+    <h1>Candidate Rankings</h1>
+    <form method="GET">
+
+    <input type="text" name="search" placeholder="Search Candidate">
+
+    <button type="submit">Search</button>
+
+</form>
+
+<br>
+
+    <table border="1" cellpadding="10">
+        <th>Edit</th>
+        <th>Action</th>
+
+        <tr>
+            <th>Rank</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>CGPA</th>
+            <th>Aptitude</th>
+            <th>Technical</th>
+            <th>Interview</th>
+            <th>Final Score</th>
+        </tr>
+
+        {% for candidate in candidates %}
+
+        {% if loop.index == 1 %}
+
+<tr style="background-color: gold; font-weight: bold;">
+
+{% else %}
+
+<tr>
+
+{% endif %}
+            <td>{{ loop.index }}</td>
+            <td>{{ candidate[0] }}</td>
+            <td>{{ candidate[1] }}</td>
+            <td>{{ candidate[2] }}</td>
+            <td>{{ candidate[3] }}</td>
+            <td>{{ candidate[4] }}</td>
+            <td>{{ candidate[5] }}</td>
+            <td>{{ candidate[6] }}</td>
+            <td>
+    <a href="/delete/{{ candidate[0] }}">
+        Delete
+    </a>
+</td>
+<td>
+    <a href="/edit/{{ candidate[0] }}">
+        Edit
+    </a>
+</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>

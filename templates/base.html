@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Candidate Ranking System for evaluating and sorting candidates.">
+    <title>{% block title %}Candidate Ranking System{% endplex %}</title>
+    <!-- Modern Typography: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+    <!-- Background Decorators for Glassmorphism Context -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+
+    <header class="app-header glass-panel">
+        <div class="header-container">
+            <h1 class="logo">
+                <span class="logo-accent">C</span>RS
+            </h1>
+            <nav class="main-nav">
+                {% if session.get('admin_id') %}
+                    <span class="text-muted" style="margin-right: 15px;">Admin: <strong>{{ session.get('username') }}</strong></span>
+                    <a href="{{ url_for('candidates.index') }}" class="nav-link">Dashboard</a>
+                    <a href="{{ url_for('candidates.add_candidate') }}" class="nav-button btn-primary">Add Candidate</a>
+                    <a href="{{ url_for('auth.logout') }}" class="nav-link" style="color: var(--danger);">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('auth.login') }}" class="nav-link">Login</a>
+                    <a href="{{ url_for('auth.register') }}" class="nav-button btn-primary">Register</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="app-main">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash glass-panel flash-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2026 Candidate Ranking System - Built with Flask & SQLite</p>
+    </footer>
+</body>
+</html>

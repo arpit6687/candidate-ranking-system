@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Edit Candidate</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/add">Add Candidate</a>
+        <a href="/ranking">Rankings</a>
+    </nav>
+
+    <h1>Edit Candidate</h1>
+
+    <form method="POST">
+
+        <label>CGPA:</label>
+        <input type="number" step="0.1" name="cgpa" value="{{ candidate[2] }}"><br><br>
+
+        <label>Aptitude:</label>
+        <input type="number" name="aptitude" value="{{ candidate[3] }}"><br><br>
+
+        <label>Technical:</label>
+        <input type="number" name="technical" value="{{ candidate[4] }}"><br><br>
+
+        <label>Interview:</label>
+        <input type="number" name="interview" value="{{ candidate[5] }}"><br><br>
+
+        <button type="submit">Update</button>
+
+    </form>
+
+</body>
+</html>
